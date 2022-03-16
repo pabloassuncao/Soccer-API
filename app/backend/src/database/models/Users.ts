@@ -2,7 +2,7 @@ import { Model, Optional, DataTypes } from 'sequelize';
 import db from '.';
 // import OtherModel from './OtherModel';
 
-interface UsersAttributes {
+export interface IUsersAttributes {
   id: number;
   username: string;
   role: string;
@@ -10,10 +10,10 @@ interface UsersAttributes {
   password: string;
 }
 
-type UsersInput = Optional<UsersAttributes, 'id'>;
-type UsersOuput = Required<UsersAttributes>;
+type UsersInput = Optional<IUsersAttributes, 'id'>;
+type UsersOuput = Required<IUsersAttributes>;
 
-class Users extends Model<UsersAttributes, UsersInput> implements UsersOuput {
+class Users extends Model<IUsersAttributes, UsersInput> implements UsersOuput {
   public id!: number;
 
   public username: string;
