@@ -1,18 +1,36 @@
-import { Model } from 'sequelize';
+import { Model, Optional, DataTypes } from 'sequelize';
 import db from '.';
 // import OtherModel from './OtherModel';
 
-class Example extends Model {
-  // public <campo>!: <tipo>;
+interface ClubsAttributes {
+  id: number;
+  'club_name': string;
 }
 
-Example.init({
-  // ... Campos
+type ClubsInput = Optional<ClubsAttributes, 'id'>;
+type ClubsOuput = Required<ClubsAttributes>;
+
+class Clubs extends Model<ClubsAttributes, ClubsInput> implements ClubsOuput {
+  public id!: number;
+
+  public 'club_name': string;
+}
+
+Clubs.init({
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
+  },
+  club_name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 }, {
-  // ... Outras configs
   underscored: true,
   sequelize: db,
-  // modelName: 'example',
+  modelName: 'Clubs',
   timestamps: false,
 });
 
@@ -27,4 +45,4 @@ Example.init({
 // Example.hasMany(OtherModel, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
 // Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 
-export default Example;
+export default Clubs;
