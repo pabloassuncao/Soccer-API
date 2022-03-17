@@ -9,6 +9,37 @@ export const ADMIN_USER = {
   password: "$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW",
 }
 
+export const ClubsFindAllResponse = [
+  {
+    id: 1,
+    clubName: 'Avaí/Kindermann',
+  },
+  {
+    id: 2,
+    clubName: 'Bahia',
+  },
+  {
+    id: 3,
+    clubName: 'Botafogo',
+  },
+  {
+    id: 4,
+    clubName: 'Corinthians',
+  },
+  {
+    id: 5,
+    clubName: 'Cruzeiro',
+  },
+  {
+    id: 6,
+    clubName: 'Palmeiras',
+  },
+  {
+    id: 7,
+    clubName: 'Flamengo',
+  }
+]
+
 export const HTTP_OK_STATUS = 200;
 export const HTTP_CREATED_STATUS = 201;
 export const HTTP_OK_NO_CONTENT_STATUS = 204;

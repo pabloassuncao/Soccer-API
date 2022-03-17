@@ -4,7 +4,7 @@ import db from '.';
 
 interface ClubsAttributes {
   id: number;
-  'club_name': string;
+  clubName: string;
 }
 
 type ClubsInput = Optional<ClubsAttributes, 'id'>;
@@ -13,7 +13,7 @@ type ClubsOuput = Required<ClubsAttributes>;
 class Clubs extends Model<ClubsAttributes, ClubsInput> implements ClubsOuput {
   public id!: number;
 
-  public 'club_name': string;
+  public clubName: string;
 }
 
 Clubs.init({
@@ -23,7 +23,8 @@ Clubs.init({
     autoIncrement: true,
     allowNull: false,
   },
-  club_name: {
+  clubName: {
+    field: 'club_name',
     type: DataTypes.STRING,
     allowNull: false,
   },

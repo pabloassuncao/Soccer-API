@@ -5,11 +5,11 @@ import Clubs from './Clubs';
 
 interface MatchsAttributes {
   id: number;
-  'home_team': number;
-  'home_team_goals': number;
-  'away_team': number;
-  'away_team_goals': number;
-  'in_progress': boolean;
+  homeTeam: number;
+  homeTeamGoals: number;
+  awayTeam: number;
+  awayTeamGoals: number;
+  inProgress: boolean;
 }
 
 type MatchsInput = Optional<MatchsAttributes, 'id'>;
@@ -18,15 +18,15 @@ type MatchsOuput = Required<MatchsAttributes>;
 class Matchs extends Model<MatchsAttributes, MatchsInput> implements MatchsOuput {
   public id: number;
 
-  public 'home_team': number;
+  public homeTeam: number;
 
-  public 'home_team_goals': number;
+  public homeTeamGoals: number;
 
-  public 'away_team': number;
+  public awayTeam: number;
 
-  public 'away_team_goals': number;
+  public awayTeamGoals: number;
 
-  public 'in_progress': boolean;
+  public inProgress: boolean;
 }
 
 Matchs.init({
@@ -36,7 +36,8 @@ Matchs.init({
     autoIncrement: true,
     allowNull: false,
   },
-  home_team: {
+  homeTeam: {
+    field: 'home_team',
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
@@ -44,11 +45,13 @@ Matchs.init({
       key: 'id',
     },
   },
-  home_team_goals: {
+  homeTeamGoals: {
+    field: 'home_team_goals',
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  away_team: {
+  awayTeam: {
+    field: 'away_team',
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
@@ -56,11 +59,13 @@ Matchs.init({
       key: 'id',
     },
   },
-  away_team_goals: {
+  awayTeamGoals: {
+    field: 'away_team_goals',
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  in_progress: {
+  inProgress: {
+    field: 'in_progress',
     type: DataTypes.BOOLEAN,
     allowNull: false,
   },

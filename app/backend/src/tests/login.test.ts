@@ -27,8 +27,6 @@ describe('Testa o login', () => {
     const chaiHttpResponse = await chai
       .request(app)
       .post('/login')
-      .set('Content-Type', 'application/json')
-      .set('Accept', 'application/json')
       .send({
         email: 'admin@admin.com',
         password: 'secret_admin',

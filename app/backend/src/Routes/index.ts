@@ -1,16 +1,11 @@
 import { Router } from 'express';
-import AuthController from '../Controllers/AuthController';
 import LoginRoute from './LoginRoute';
-import ValidateRoute from './ValidateRoute';
+import ClubsRoute from './ClubsRoute';
 
 const route = Router();
 
-// const authController = new AuthController().authenticator;
-
 route.use('/login', LoginRoute);
 
-route.use(AuthController.authenticator);
-
-route.use('/login/validate', ValidateRoute);
+route.use('/clubs', ClubsRoute);
 
 export default route;
