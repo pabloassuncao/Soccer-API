@@ -1,4 +1,5 @@
 export const LOGIN_ROUTE = '/login';
+export const LOGIN_VALIDATE_ROUTE = '/login/validate';
 
 export const ADMIN_USER = {
   id: 1,

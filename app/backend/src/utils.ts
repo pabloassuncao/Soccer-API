@@ -29,7 +29,7 @@ export enum MESSAGES {
   UNAUTHORIZED_USER = 'Unauthorized user',
 }
 
-export const JWT_SECRET = readFileSync(`${__dirname}/../jwt.evaluation.key`).toString();
+export const JWT_SECRET = readFileSync(`${__dirname}/../jwt.evaluation.key`, 'utf8');
 
 export interface ErrList {
   readonly BAD_REQUEST: number,

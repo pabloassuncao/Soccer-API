@@ -1,12 +1,16 @@
 import { Router } from 'express';
-import loginRoute from './LoginRoute';
+import AuthController from '../Controllers/AuthController';
+import LoginRoute from './LoginRoute';
+import ValidateRoute from './ValidateRoute';
 
 const route = Router();
 
-route.use('/login', loginRoute);
+// const authController = new AuthController().authenticator;
 
-route.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+route.use('/login', LoginRoute);
+
+route.use(AuthController.authenticator);
+
+route.use('/login/validate', ValidateRoute);
 
 export default route;

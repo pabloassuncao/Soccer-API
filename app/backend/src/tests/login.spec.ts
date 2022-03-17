@@ -5,7 +5,7 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 import Users from '../database/models/Users';
 
-import { ADMIN_USER, HTTP_BAD_REQUEST_STATUS, HTTP_OK_STATUS, HTTP_UNAUTHORIZED_STATUS, HTTP_UNPROCCESSABLE_ENTITY_STATUS, LOGIN_ROUTE } from './helpers';
+import { ADMIN_USER, HTTP_BAD_REQUEST_STATUS, HTTP_OK_STATUS, HTTP_UNAUTHORIZED_STATUS, HTTP_UNPROCCESSABLE_ENTITY_STATUS, LOGIN_ROUTE, LOGIN_VALIDATE_ROUTE } from './helpers';
 import UserRepository from '../Repositories/UserRepository';
 
 chai.use(chaiHttp);
@@ -116,6 +116,71 @@ describe('Testa o login', () => {
       expect(chaiHttpResponse.body).to.have.property('message');
       expect(chaiHttpResponse.body.message).to.be.equal('Incorrect email or password');
       expect(chaiHttpResponse.body.email).to.be.undefined;
+    });
+  });
+  describe('Testa o get do login/validate', async () => {
+    
+    it('Testa dar erro ao tentar validar sem token válido', async () => {
+      const chaiHttpResponse = await chai
+        .request(app)
+        .get(LOGIN_VALIDATE_ROUTE)
+      
+      expect(chaiHttpResponse.status).to.be.equal(HTTP_UNAUTHORIZED_STATUS);
+      expect(chaiHttpResponse.body).to.be.an('object');
+      expect(chaiHttpResponse.body).to.have.property('message');
+      expect(chaiHttpResponse.body.message).to.be.equal('Token not found');
+    });
+
+    it('Testa dar erro ao tentar validar com token inválido', async () => {
+      const chaiHttpResponse = await chai
+        .request(app)
+        .get(LOGIN_VALIDATE_ROUTE)
+        .set('Authorization', 'Bearer invalid_token')
+      
+      expect(chaiHttpResponse.status).to.be.equal(HTTP_UNAUTHORIZED_STATUS);
+      expect(chaiHttpResponse.body).to.be.an('object');
+      expect(chaiHttpResponse.body).to.have.property('message');
+      expect(chaiHttpResponse.body.message).to.be.equal('Expired or invalid token');
+    });
+
+    it('Testa se retorna admin', async () => {
+      const login = await chai
+        .request(app)
+        .post('/login')
+        .send({
+          email: 'admin@admin.com',
+          password: 'secret_admin',
+        });
+
+
+      const chaiHttpResponse = await chai
+        .request(app)
+        .get(LOGIN_VALIDATE_ROUTE)
+        .set('Authorization', login.body.token);
+
+      expect(chaiHttpResponse.status).to.be.equal(HTTP_OK_STATUS);
+      expect(chaiHttpResponse.text).to.be.an('string');
+      expect(chaiHttpResponse.text).to.be.equal('admin');
+    });
+
+    it('Testa se retorna user', async () => {
+      const login = await chai
+        .request(app)
+        .post(LOGIN_ROUTE)
+        .send({
+          email: 'user@user.com',
+          password: 'secret_user',
+        });
+
+
+      const chaiHttpResponse = await chai
+        .request(app)
+        .get(LOGIN_VALIDATE_ROUTE)
+        .set('Authorization', login.body.token);
+
+      expect(chaiHttpResponse.status).to.be.equal(HTTP_OK_STATUS);
+      expect(chaiHttpResponse.text).to.be.an('string');
+      expect(chaiHttpResponse.text).to.be.equal('user');
     });
   });
 });
