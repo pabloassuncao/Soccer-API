@@ -4,33 +4,12 @@ import utils, { Err, ERR_CODES } from './utils';
 
 class App {
   public app: Express;
-  // ...
 
   constructor() {
-    // ...
     this.app = express();
     this.config();
-    // ...
-  }
-
-  private config():void {
-    const accessControl: express
-      .RequestHandler = (_req: Request, res: Response, next: NextFunction) => {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT');
-        res.header('Access-Control-Allow-Headers', '*');
-        next();
-      };
-
-    this.app.use(accessControl);
-    // ...
-  }
-
-  // ...
-  public start(PORT: string | number):void {
-    // ...
-    this.app.listen(PORT);
     this.app.use(express.json());
+
     this.app.use('/', routes);
 
     this.app.use('/', (err: Err, __req: Request, res: Response, __next: NextFunction) => {
@@ -44,6 +23,22 @@ class App {
         .status(utils.HTTP_INTERNAL_SERVER_ERROR_STATUS)
         .json({ message: 'Internal server error' }).end();
     });
+  }
+
+  private config():void {
+    const accessControl: express
+      .RequestHandler = (_req: Request, res: Response, next: NextFunction) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT');
+        res.header('Access-Control-Allow-Headers', '*');
+        next();
+      };
+
+    this.app.use(accessControl);
+  }
+
+  public start(PORT: string | number):void {
+    this.app.listen(PORT);
     console.log(`Server running on port ${PORT}`);
   }
 }

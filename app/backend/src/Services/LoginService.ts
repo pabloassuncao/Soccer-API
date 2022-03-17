@@ -1,14 +1,18 @@
 import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import UserRepository from '../Repositories/UserRepository';
-import { Err, JWT_SECRET } from '../utils';
+import { Err, JWT_SECRET, MESSAGES } from '../utils';
 
 export default class LoginService {
   static async Login(data: { email: string, password: string }) {
     const user = await UserRepository.findByEmail(data.email);
 
+    if (!user) {
+      throw new Err('BAD_REQUEST', MESSAGES.EMAIL_PASSWORD_INVALID);
+    }
+
     if (!bcrypt.compareSync(data.password, user.password)) {
-      throw new Err('BAD_REQUEST', 'Invalid password');
+      throw new Err('BAD_REQUEST', MESSAGES.EMAIL_PASSWORD_INVALID);
     }
 
     const result = await UserRepository.findByEmail(data.email, ['password']);
