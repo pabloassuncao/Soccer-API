@@ -8,7 +8,7 @@ import Clubs from '../database/models/Clubs';
 
 import { ADMIN_USER, ClubsFindAllResponse, FinishMatchResponse,
   HTTP_CREATED_STATUS, HTTP_OK_STATUS, HTTP_UNAUTHORIZED_STATUS,
-  MatchesCreateResponse, MatchesFindAllResponse, MatchesFindAllTrueResponse, NewMatchFindByIdResponse } from './helpers';
+  MatchesCreateResponse, MatchesFindAllResponse, MatchesFindAllTrueResponse, NewMatchFindByIdResponse, UpdatedMatchResponse } from './helpers';
 import Users from '../database/models/Users';
 
 chai.use(chaiHttp);
@@ -283,5 +283,71 @@ describe('Testa os endpoints PATCH do /matchs', () => {
         clubName: 'Palmeiras',
       }
     });
+  });
+});
+
+describe('Testa os endpoints PATCH do /matchs/:id', () => {
+  before(async () => {
+    sinon
+      .stub(Matches, "findByPk")
+      .onCall(0).resolves(new UpdatedMatchResponse(10, 0, true) as unknown as Matches)
+      .onCall(1).resolves(new UpdatedMatchResponse(5, 1, false) as unknown as Matches);
+
+    sinon
+      .stub(Matches, "update")
+      .onCall(0).resolves([1, [new Matches()]] )
+      .onCall(1).resolves([0, [new Matches()]] );
+  });
+
+  after(()=>{
+    (Matches.findByPk as sinon.SinonStub).restore(); 
+    (Matches.update as sinon.SinonStub).restore(); 
+  });
+
+  it('Testa se recebe o id no /matchs/:id para atualizar a partida', async () => {
+    const login = await chai
+      .request(app)
+      .post('/login')
+      .send({
+        email: 'admin@admin.com',
+        password: 'secret_admin',
+      });
+
+    const chaiHttpResponse = await chai
+      .request(app)
+      .patch('/matchs/14')
+      .set('Authorization', login.body.token)
+      .send({
+        homeTeamGoals: 10,
+        awayTeamGoals: 0,
+      });
+
+    expect(chaiHttpResponse.status).to.be.equal(HTTP_OK_STATUS);
+    expect(chaiHttpResponse.body).to.be.an('object');
+    expect(chaiHttpResponse.body.homeTeamGoals).to.be.equal(10);
+    expect(chaiHttpResponse.body.awayTeamGoals).to.be.equal(0);
+    expect(chaiHttpResponse.body.inProgress).to.be.true;
+  });
+
+  it('Testa se recebe o id no /matchs/:id sem body para finalizar a partida', async () => {
+    const login = await chai
+      .request(app)
+      .post('/login')
+      .send({
+        email: 'admin@admin.com',
+        password: 'secret_admin',
+      });
+
+    const chaiHttpResponse = await chai
+      .request(app)
+      .patch('/matchs/14')
+      .set('Authorization', login.body.token)
+      .send();
+
+    expect(chaiHttpResponse.status).to.be.equal(HTTP_OK_STATUS);
+    expect(chaiHttpResponse.body).to.be.an('object');
+    expect(chaiHttpResponse.body.homeTeamGoals).to.be.undefined
+    expect(chaiHttpResponse.body.awayTeamGoals).to.be.undefined
+    expect(chaiHttpResponse.body.inProgress).to.be.false;
   });
 })

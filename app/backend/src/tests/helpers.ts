@@ -119,6 +119,48 @@ export class FinishMatchResponse {
 	}
 }
 
+export class UpdatedMatchResponse {
+  id= 14;
+  homeTeam= 12;
+  homeTeamGoals= 10;
+  awayTeam= 4;
+  awayTeamGoals= 0;
+  inProgress= true;
+  awayClub= {
+    id: 4,
+    clubName: 'Corinthians',
+  };
+  homeClub= {
+    id: 12,
+    clubName: 'Palmeiras',
+  }
+
+	constructor(homeTeamGoals: number, awayTeamGoals: number, inProgress: boolean) {
+		this.homeTeamGoals = homeTeamGoals;
+		this.awayTeamGoals = awayTeamGoals;
+		this.inProgress = inProgress;
+	}
+
+	public toJSON() {
+		return {
+			id: this.id,
+			homeTeam: this.homeTeam,
+			homeTeamGoals: this.homeTeamGoals,
+			awayTeam: this.awayTeam,
+			awayTeamGoals: this.awayTeamGoals,
+			inProgress: this.inProgress,
+			awayClub: {
+				id: this.awayClub.id,
+				clubName: this.awayClub.clubName,
+			},
+			homeClub: {
+				id: this.homeClub.id,
+				clubName: this.homeClub.clubName,
+			}
+		}
+	}
+}
+
 export const MatchesFindAllResponse = [
 	{
 		id: 1,

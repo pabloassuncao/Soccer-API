@@ -14,7 +14,7 @@ class App {
 
     this.app.use((err: Err, __req: Request, res: Response, __next: NextFunction) => {
       const status = ERR_CODES[err.code];
-      console.log('ERROOOOOOOOOOOOOOOOOOOOOOOOOO', status, err.message);
+      console.log('ERROOOOOOOOOOOOOOOOOOOOOOOOOO', status, err);
 
       if (status) {
         return res.status(+status).json({ message: err.message }).end();

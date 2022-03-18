@@ -8,6 +8,7 @@ const route = Router();
 
 route.patch('/:id/finish', rescue(MatchesController.finishHim));
 route.get('/:id', rescue(MatchesController.getById));
+route.patch('/:id', rescue(MatchesController.update));
 route.get('/', rescue(MatchesController.getAll));
 route.post('/', rescue(Schemas.matchValidate), rescue(MatchesController.create));
 

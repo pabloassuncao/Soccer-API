@@ -2,12 +2,19 @@ import { Err } from '../utils';
 import MatchRepository from '../Repositories/MatchRepository';
 import ClubsService from './ClubsService';
 
-export interface INewMatchDTO {
+export interface IMatchDTO {
+  id?: number;
   homeTeam: number;
   awayTeam: number;
   homeTeamGoals: number;
   awayTeamGoals: number;
   inProgress: boolean;
+}
+
+export interface IUpdateMatchDTO {
+  id: number;
+  homeTeamGoals: number;
+  awayTeamGoals: number;
 }
 
 export default class MatchesService {
@@ -35,7 +42,7 @@ export default class MatchesService {
     return res;
   }
 
-  static async create(data: INewMatchDTO) {
+  static async create(data: IMatchDTO) {
     await this.clubsChecker(data.awayTeam, data.homeTeam);
 
     const newMatch = await MatchRepository.create(data);
@@ -58,5 +65,21 @@ export default class MatchesService {
     console.log(match.toJSON());
 
     return match.toJSON();
+  }
+
+  static async update({ id, awayTeamGoals, homeTeamGoals }: IUpdateMatchDTO) {
+    const match = await this.getById(id);
+
+    if (!homeTeamGoals && !awayTeamGoals) {
+      match.inProgress = false;
+      MatchRepository.update(match);
+    }
+
+    match.homeTeamGoals = homeTeamGoals;
+    match.awayTeamGoals = awayTeamGoals;
+
+    await MatchRepository.update(match);
+
+    return match;
   }
 }

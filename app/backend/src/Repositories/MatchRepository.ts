@@ -53,15 +53,13 @@ export default class MatchRepository {
   static async update(data: MatchesInput): Promise<void> {
     const { id, homeTeamGoals, awayTeamGoals, inProgress } = data;
 
-    const [res] = await Matches.update({
+    await Matches.update({
       homeTeamGoals, awayTeamGoals, inProgress,
     }, {
       where: {
         id,
       },
     });
-
-    console.log(res);
   }
 
   // static async findOne(where: object, options?: object): Promise<Matches> {
