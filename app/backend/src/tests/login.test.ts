@@ -6,7 +6,6 @@ import { app } from '../app';
 import Users from '../database/models/Users';
 
 import { ADMIN_USER, HTTP_BAD_REQUEST_STATUS, HTTP_OK_STATUS, HTTP_UNAUTHORIZED_STATUS, HTTP_UNPROCCESSABLE_ENTITY_STATUS, LOGIN_ROUTE, LOGIN_VALIDATE_ROUTE } from './helpers';
-import UserRepository from '../Repositories/UserRepository';
 
 chai.use(chaiHttp);
 
@@ -16,12 +15,12 @@ describe('Testa o login', () => {
   describe('Testa o login com dados válidos', async () => {
     before(async () => {
       sinon
-        .stub(UserRepository, "findByEmail")
+        .stub(Users, "findOne")
         .resolves(ADMIN_USER as Users);
     });
 
     after(()=>{
-      (UserRepository.findByEmail as sinon.SinonStub).restore();
+      (Users.findOne as sinon.SinonStub).restore();
     })
   
     const chaiHttpResponse = await chai

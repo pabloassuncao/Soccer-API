@@ -6,8 +6,6 @@ import { app } from '../app';
 import Clubs from '../database/models/Clubs';
 
 import { ClubsFindAllResponse, HTTP_OK_STATUS } from './helpers';
-import ClubRepository from '../Repositories/ClubRepository';
-
 
 chai.use(chaiHttp);
 
@@ -16,12 +14,17 @@ const { expect } = chai;
 describe('Testa os endpoints do /clubs', () => {
   before(async () => {
     sinon
-      .stub(ClubRepository, "getAll")
+      .stub(Clubs, "findAll")
       .resolves(ClubsFindAllResponse as Clubs[]);
+
+    sinon
+      .stub(Clubs, "findOne")
+      .resolves(ClubsFindAllResponse[0] as Clubs);
   });
 
   after(()=>{
-    (ClubRepository.getAll as sinon.SinonStub).restore();
+    (Clubs.findAll as sinon.SinonStub).restore();
+    (Clubs.findOne as sinon.SinonStub).restore();
   })
 
   it('Testa se recebe a lista com todos os times', async () => {

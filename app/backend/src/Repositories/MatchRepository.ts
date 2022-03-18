@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 import Clubs from '../database/models/Clubs';
-import Matches from '../database/models/Matches';
+import Matches, { MatchesInput } from '../database/models/Matches';
 
 export default class MatchRepository {
   static model = Matches;
@@ -33,6 +33,15 @@ export default class MatchRepository {
       ],
     });
     return matches;
+  }
+
+  static async create(data: MatchesInput): Promise<Matches> {
+    const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress } = data;
+
+    const res = await Matches.create({
+      homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress,
+    });
+    return res;
   }
 
   // static async findOne(where: object, exclude?: string[]): Promise<Matches | null> {

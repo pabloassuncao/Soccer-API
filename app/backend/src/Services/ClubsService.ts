@@ -1,3 +1,4 @@
+import { Err } from '../utils';
 import ClubRepository from '../Repositories/ClubRepository';
 
 export default class ClubsService {
@@ -6,6 +7,12 @@ export default class ClubsService {
   }
 
   static async getById(id: number) {
-    return ClubRepository.getById(id, { raw: true });
+    const res = ClubRepository.getById(id, { raw: true });
+
+    if (!res) {
+      throw new Err('UNPROCCESSABLE_ENTITY', 'Club not found');
+    }
+
+    return res;
   }
 }

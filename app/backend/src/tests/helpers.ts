@@ -57,6 +57,32 @@ export interface IMatchesFindAllResponse {
   }
 }
 
+export const MatchesCreateResponse = {
+  id: 14,
+  homeTeam: 12,
+  homeTeamGoals: 5,
+  awayTeam: 4,
+  awayTeamGoals: 1,
+  inProgress: true,
+}
+
+export const NewMatchFindByIdResponse = {
+  id: 14,
+  homeTeam: 12,
+  homeTeamGoals: 5,
+  awayTeam: 4,
+  awayTeamGoals: 1,
+  inProgress: true,
+  awayClub: {
+    id: 4,
+    clubName: 'Corinthians',
+  },
+  homeClub: {
+    id: 12,
+    clubName: 'Palmeiras',
+  }
+}
+
 export const MatchesFindAllResponse = [
 	{
 		id: 1,

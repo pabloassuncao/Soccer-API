@@ -12,8 +12,8 @@ interface MatchesAttributes {
   inProgress: boolean;
 }
 
-type MatchesInput = Optional<MatchesAttributes, 'id'>;
-type MatchesOuput = Required<MatchesAttributes>;
+export type MatchesInput = Optional<MatchesAttributes, 'id'>;
+export type MatchesOuput = Required<MatchesAttributes>;
 
 class Matches extends Model<MatchesAttributes, MatchesInput> implements MatchesOuput {
   public id: number;
