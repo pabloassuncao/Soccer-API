@@ -1,6 +1,6 @@
 import ClubRepository from '../Repositories/ClubRepository';
 
-export default class ClubService {
+export default class ClubsService {
   static async getAll() {
     return ClubRepository.getAll({ raw: true });
   }

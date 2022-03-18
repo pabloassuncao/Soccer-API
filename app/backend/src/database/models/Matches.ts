@@ -3,7 +3,7 @@ import db from '.';
 import Clubs from './Clubs';
 // import OtherModel from './OtherModel';
 
-interface MatchsAttributes {
+interface MatchesAttributes {
   id: number;
   homeTeam: number;
   homeTeamGoals: number;
@@ -12,10 +12,10 @@ interface MatchsAttributes {
   inProgress: boolean;
 }
 
-type MatchsInput = Optional<MatchsAttributes, 'id'>;
-type MatchsOuput = Required<MatchsAttributes>;
+type MatchesInput = Optional<MatchesAttributes, 'id'>;
+type MatchesOuput = Required<MatchesAttributes>;
 
-class Matchs extends Model<MatchsAttributes, MatchsInput> implements MatchsOuput {
+class Matches extends Model<MatchesAttributes, MatchesInput> implements MatchesOuput {
   public id: number;
 
   public homeTeam: number;
@@ -29,7 +29,7 @@ class Matchs extends Model<MatchsAttributes, MatchsInput> implements MatchsOuput
   public inProgress: boolean;
 }
 
-Matchs.init({
+Matches.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -81,11 +81,11 @@ Matchs.init({
   * Associations 1:N devem ficar em uma das instâncias de modelo
   * */
 
-Matchs.belongsTo(Clubs, { foreignKey: 'home_team', targetKey: 'id', as: 'homeClub' });
-Matchs.belongsTo(Clubs, { foreignKey: 'away_team', targetKey: 'id', as: 'awayClub' });
+Matches.belongsTo(Clubs, { foreignKey: 'home_team', targetKey: 'id', as: 'homeClub' });
+Matches.belongsTo(Clubs, { foreignKey: 'away_team', targetKey: 'id', as: 'awayClub' });
 
-Clubs.hasMany(Matchs, { foreignKey: 'home_team', as: 'home' });
-Clubs.hasMany(Matchs, { foreignKey: 'away_team', as: 'away' });
+Clubs.hasMany(Matches, { foreignKey: 'home_team', as: 'home' });
+Clubs.hasMany(Matches, { foreignKey: 'away_team', as: 'away' });
 
 // OtherModel.belongsTo(Example, { foreignKey: 'campoA', as: 'campoEstrangeiroA' });
 // OtherModel.belongsTo(Example, { foreignKey: 'campoB', as: 'campoEstrangeiroB' });
@@ -93,4 +93,4 @@ Clubs.hasMany(Matchs, { foreignKey: 'away_team', as: 'away' });
 // Example.hasMany(OtherModel, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
 // Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 
-export default Matchs;
+export default Matches;

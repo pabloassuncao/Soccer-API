@@ -14,12 +14,12 @@ export default class ClubRepository {
     return club;
   }
 
-  static async findOne(where: object, exclude?: string[]): Promise<Clubs | null> {
-    const options = exclude ? { where, attributes: { exclude } }
-      : { where };
+  // static async findOne(where: object, exclude?: string[]): Promise<Clubs | null> {
+  //   const options = exclude ? { where, attributes: { exclude } }
+  //     : { where };
 
-    const clubs: Clubs | null = await Clubs.findOne(options);
+  //   const clubs: Clubs | null = await Clubs.findOne(options);
 
-    return clubs;
-  }
+  //   return clubs;
+  // }
 }

@@ -40,6 +40,189 @@ export const ClubsFindAllResponse = [
   }
 ]
 
+export interface IMatchesFindAllResponse {
+  id: number,
+  homeTeam: number,
+  homeTeamGoals: number,
+  awayTeam: number,
+  awayTeamGoals: number,
+  inProgress: boolean,
+  awayClub: {
+    id: number,
+    clubName: string,
+  },
+  homeClub: {
+    id: number,
+    clubName: string,
+  }
+}
+
+export const MatchesFindAllResponse = [
+	{
+		id: 1,
+		homeTeam: 16,
+		homeTeamGoals: 1,
+		awayTeam: 8,
+		awayTeamGoals: 1,
+		inProgress: false,
+		awayClub: {
+			id: 8,
+			clubName: 'Grêmio'
+		},
+		homeClub: {
+			id: 16,
+			clubName: 'São Paulo'
+		}
+	},
+	{
+		id: 2,
+		homeTeam: 9,
+		homeTeamGoals: 1,
+		awayTeam: 14,
+		awayTeamGoals: 1,
+		inProgress: false,
+		awayClub: {
+			id: 14,
+			clubName: 'Santos'
+		},
+		homeClub: {
+			id: 9,
+			clubName: 'Internacional'
+		}
+	},
+	{
+		id: 3,
+		homeTeam: 4,
+		homeTeamGoals: 3,
+		awayTeam: 11,
+		awayTeamGoals: 0,
+		inProgress: false,
+		awayClub: {
+			id: 11,
+			clubName: 'Napoli-SC'
+		},
+		homeClub: {
+			id: 4,
+			clubName: 'Corinthians'
+		}
+	},
+	{
+		id: 4,
+		homeTeam: 3,
+		homeTeamGoals: 0,
+		awayTeam: 2,
+		awayTeamGoals: 0,
+		inProgress: false,
+		awayClub: {
+			id: 2,
+			clubName: 'Bahia'
+		},
+		homeClub: {
+			id: 3,
+			clubName: 'Botafogo'
+		}
+	},
+	{
+		id: 5,
+		homeTeam: 7,
+		homeTeamGoals: 1,
+		awayTeam: 10,
+		awayTeamGoals: 1,
+		inProgress: false,
+		awayClub: {
+			id: 10,
+			clubName: 'Minas Brasília'
+		},
+		homeClub: {
+			id: 7,
+			clubName: 'Flamengo'
+		}
+	},
+	{
+		id: 6,
+		homeTeam: 5,
+		homeTeamGoals: 1,
+		awayTeam: 13,
+		awayTeamGoals: 1,
+		inProgress: false,
+		awayClub: {
+			id: 13,
+			clubName: 'Real Brasília'
+		},
+		homeClub: {
+			id: 5,
+			clubName: 'Cruzeiro'
+		}
+	},
+	{
+		id: 7,
+		homeTeam: 12,
+		homeTeamGoals: 2,
+		awayTeam: 6,
+		awayTeamGoals: 2,
+		inProgress: false,
+		awayClub: {
+			id: 6,
+			clubName: 'Ferroviária'
+		},
+		homeClub: {
+			id: 12,
+			clubName: 'Palmeiras'
+		}
+	},
+]
+
+export const MatchesFindAllTrueResponse = [
+	{
+		id: 1,
+		homeTeam: 16,
+		homeTeamGoals: 1,
+		awayTeam: 8,
+		awayTeamGoals: 1,
+		inProgress: true,
+		awayClub: {
+			id: 8,
+			clubName: 'Grêmio'
+		},
+		homeClub: {
+			id: 16,
+			clubName: 'São Paulo'
+		}
+	},
+	{
+		id: 2,
+		homeTeam: 9,
+		homeTeamGoals: 1,
+		awayTeam: 14,
+		awayTeamGoals: 1,
+		inProgress: true,
+		awayClub: {
+			id: 14,
+			clubName: 'Santos'
+		},
+		homeClub: {
+			id: 9,
+			clubName: 'Internacional'
+		}
+	},
+	{
+		id: 3,
+		homeTeam: 4,
+		homeTeamGoals: 3,
+		awayTeam: 11,
+		awayTeamGoals: 0,
+		inProgress: true,
+		awayClub: {
+			id: 11,
+			clubName: 'Napoli-SC'
+		},
+		homeClub: {
+			id: 4,
+			clubName: 'Corinthians'
+		}
+	},
+]
+
 export const HTTP_OK_STATUS = 200;
 export const HTTP_CREATED_STATUS = 201;
 export const HTTP_OK_NO_CONTENT_STATUS = 204;
