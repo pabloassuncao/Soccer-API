@@ -1,4 +1,5 @@
 import { Op } from 'sequelize';
+import { Err } from '../utils';
 import Clubs from '../database/models/Clubs';
 import Matches, { MatchesInput } from '../database/models/Matches';
 
@@ -22,7 +23,7 @@ export default class MatchRepository {
     return matches;
   }
 
-  static async getById(id: number): Promise<Matches | null> {
+  static async getById(id: number) {
     const matches: Matches | null = await Matches.findByPk(id, {
       attributes: { exclude: ['home_team', 'away_team'] },
       include: [
@@ -32,6 +33,11 @@ export default class MatchRepository {
           as: 'homeClub' },
       ],
     });
+
+    if (!matches) {
+      throw new Err('UNAUTHORIZED', 'Match not found');
+    }
+
     return matches;
   }
 
@@ -44,11 +50,28 @@ export default class MatchRepository {
     return res;
   }
 
-  // static async findOne(where: object, exclude?: string[]): Promise<Matches | null> {
-  //   const options = exclude ? { where, attributes: { exclude } }
-  //     : { where };
+  static async update(data: MatchesInput): Promise<void> {
+    const { id, homeTeamGoals, awayTeamGoals, inProgress } = data;
 
-  //   const matches: Matches | null = await Matches.findOne(options);
+    const [res] = await Matches.update({
+      homeTeamGoals, awayTeamGoals, inProgress,
+    }, {
+      where: {
+        id,
+      },
+    });
+
+    console.log(res);
+  }
+
+  // static async findOne(where: object, options?: object): Promise<Matches> {
+  //   const opt = options ? { where, ...options } : { where };
+
+  //   const matches: Matches | null = await Matches.findOne(opt);
+
+  //   if (!matches) {
+  //     throw new Err('UNAUTHORIZED', 'Match not found');
+  //   }
 
   //   return matches;
   // }

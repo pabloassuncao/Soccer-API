@@ -7,10 +7,10 @@ export default class ClubsService {
   }
 
   static async getById(id: number) {
-    const res = ClubRepository.getById(id, { raw: true });
+    const res = await ClubRepository.getById(id, { raw: true });
 
     if (!res) {
-      throw new Err('UNPROCCESSABLE_ENTITY', 'Club not found');
+      throw new Err('UNAUTHORIZED', 'There is no team with such id!');
     }
 
     return res;

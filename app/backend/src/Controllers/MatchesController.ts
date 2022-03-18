@@ -15,15 +15,26 @@ export default class MatchesController {
   }
 
   static async create(req: Request, res: Response) {
-    const { homeTeam, awayTeam, awayTeamGoals, homeTeamGoals, inProgress } = req.body;
+    const {
+      homeTeam, awayTeam, awayGoals, homeGoals, inProgress, awayTeamGoals, homeTeamGoals,
+    } = req.body;
 
-    const result = await MatchesService.create({
+    const newMatch = {
       homeTeam: +homeTeam,
       awayTeam: +awayTeam,
-      awayTeamGoals: +awayTeamGoals,
-      homeTeamGoals: +homeTeamGoals,
-      inProgress,
-    });
+      homeTeamGoals: +homeGoals || +homeTeamGoals || 0,
+      awayTeamGoals: +awayGoals || +awayTeamGoals || 0,
+      inProgress: inProgress ?? 'true',
+    };
+
+    const result = await MatchesService.create(newMatch);
     return res.status(201).json(result).end();
+  }
+
+  static async finishHim(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const result = await MatchesService.finishHim(+id);
+    return res.status(200).send(result).end();
   }
 }

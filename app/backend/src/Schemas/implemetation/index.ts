@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { Err } from '../../utils';
 import loginSchema from '../loginSchema';
-import matchSchema from '../matchSchema';
+import matchSchemas from '../matchSchema';
 
 async function loginValidate(req: Request, _r: Response, next: NextFunction): Promise<void> {
   const { error } = loginSchema.validate(req.body);
@@ -12,9 +12,9 @@ async function loginValidate(req: Request, _r: Response, next: NextFunction): Pr
 }
 
 async function matchValidate(req: Request, _r: Response, next: NextFunction): Promise<void> {
-  const { error } = matchSchema.validate(req.body);
+  const { error } = matchSchemas.definitiveSchema.validate(req.body);
   if (error) {
-    throw new Err('UNPROCCESSABLE_ENTITY', error.details[0].message);
+    throw new Err('UNAUTHORIZED', error.details[0].message);
   }
   return next();
 }

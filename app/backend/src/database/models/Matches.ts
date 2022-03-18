@@ -1,6 +1,6 @@
 import { Model, Optional, DataTypes } from 'sequelize';
 import db from '.';
-import Clubs from './Clubs';
+import Clubs, { ClubsAttributes } from './Clubs';
 // import OtherModel from './OtherModel';
 
 interface MatchesAttributes {
@@ -10,6 +10,8 @@ interface MatchesAttributes {
   awayTeam: number;
   awayTeamGoals: number;
   inProgress: boolean;
+  awayClub?: ClubsAttributes;
+  homeClub?: ClubsAttributes;
 }
 
 export type MatchesInput = Optional<MatchesAttributes, 'id'>;
@@ -27,6 +29,10 @@ class Matches extends Model<MatchesAttributes, MatchesInput> implements MatchesO
   public awayTeamGoals: number;
 
   public inProgress: boolean;
+
+  public awayClub: ClubsAttributes;
+
+  public homeClub: ClubsAttributes;
 }
 
 Matches.init({

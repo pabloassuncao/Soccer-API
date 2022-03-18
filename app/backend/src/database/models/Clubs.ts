@@ -2,7 +2,7 @@ import { Model, Optional, DataTypes } from 'sequelize';
 import db from '.';
 // import OtherModel from './OtherModel';
 
-interface ClubsAttributes {
+export interface ClubsAttributes {
   id: number;
   clubName: string;
 }

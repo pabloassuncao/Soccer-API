@@ -13,7 +13,10 @@ export interface INewMatchDTO {
 export default class MatchesService {
   private static async clubsChecker(awayTeam: number, homeTeam: number) {
     if (awayTeam === homeTeam) {
-      throw new Err('UNPROCCESSABLE_ENTITY', 'Teams cannot be the same');
+      throw new Err(
+        'UNAUTHORIZED',
+        'It is not possible to create a match with two equal teams',
+      );
     }
 
     await ClubsService.getById(homeTeam);
@@ -29,16 +32,31 @@ export default class MatchesService {
     const res = MatchRepository
       .getById(id);
 
-    if (!res) {
-      throw new Err('UNPROCCESSABLE_ENTITY', 'Match not found');
-    }
-
     return res;
   }
 
   static async create(data: INewMatchDTO) {
-    this.clubsChecker(data.awayTeam, data.homeTeam);
+    await this.clubsChecker(data.awayTeam, data.homeTeam);
 
-    return MatchRepository.create(data);
+    const newMatch = await MatchRepository.create(data);
+
+    return newMatch;
+  }
+
+  static async finishHim(id: number) {
+    const match = await this.getById(id);
+
+    if (!match) {
+      throw new Err('UNAUTHORIZED', 'Match not found');
+    }
+
+    if (match.inProgress) {
+      match.inProgress = false;
+      await MatchRepository.update(match);
+    }
+
+    console.log(match.toJSON());
+
+    return match.toJSON();
   }
 }
