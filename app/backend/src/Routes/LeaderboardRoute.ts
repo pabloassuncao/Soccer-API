@@ -7,4 +7,8 @@ const route = Router();
 
 route.get('/home', rescue(LeaderboardController.getLeaderboard));
 
+route.get('/away', rescue(LeaderboardController.getLeaderboard));
+
+route.get('/', rescue(LeaderboardController.getLeaderboard));
+
 export default route;

@@ -62,8 +62,6 @@ export default class MatchesService {
       await MatchRepository.update(match);
     }
 
-    console.log(match.toJSON());
-
     return match.toJSON();
   }
 

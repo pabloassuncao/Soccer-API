@@ -1,6 +1,7 @@
 /* eslint-disable max-lines-per-function */
-import { Err, Leaderboard } from '../utils';
+import { Leaderboard } from '../utils';
 import LeaderboardRepository from '../Repositories/LeaderboardRepository';
+import ClubsService from './ClubsService';
 
 export default class LeaderboardService {
   private static sortLeaderboard(a: Leaderboard, b: Leaderboard) {
@@ -12,25 +13,11 @@ export default class LeaderboardService {
   }
 
   static async getLeaderboard(where: ['homeTeam' | 'awayTeam'] | ['awayTeam', 'homeTeam']) {
-    const clubs = await LeaderboardRepository.getAllClubs();
+    const clubs = await ClubsService.getAllClubsWithMatches();
 
     const result = LeaderboardRepository.getLeaderboard(clubs, where)
       .sort(this.sortLeaderboard);
 
-    if (result.some((e) => e === undefined)) {
-      throw new Err('UNAUTHORIZED', 'There is no leaderboard!');
-    }
-
     return result;
-  }
-
-  static async getById(id: number) {
-    const res = await LeaderboardRepository.getById(id);
-
-    if (!res) {
-      throw new Err('UNAUTHORIZED', 'There is no team with such id!');
-    }
-
-    return res;
   }
 }

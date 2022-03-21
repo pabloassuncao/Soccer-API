@@ -40,7 +40,7 @@ export const ClubsFindAllResponse = [
   }
 ]
 
-export const FindAllClubsWithMatchesResponse = [
+export const FindAllClubsWithMatchesHomeResponse = [
 	{
 		id: 12,
 		clubName: 'Palmeiras',
@@ -219,6 +219,347 @@ export const FindAllClubsWithMatchesResponse = [
 	},
 ];
 
+export const FindAllClubsWithMatchesAwayResponse = [
+	{
+		id: 4,
+		clubName: 'Corinthians',
+		awayTeam: [
+			{
+				id: 12,
+				homeTeam: 6,
+				homeTeamGoals: 0,
+				awayTeam: 4,
+				awayTeamGoals: 1,
+				inProgress: false
+			},
+			{
+				id: 29,
+				homeTeam: 9,
+				homeTeamGoals: 0,
+				awayTeam: 4,
+				awayTeamGoals: 4,
+				inProgress: false
+			},
+			{
+				id: 38,
+				homeTeam: 14,
+				homeTeamGoals: 2,
+				awayTeam: 4,
+				awayTeamGoals: 1,
+				inProgress: false
+			}
+		],
+		homeTeam: [
+			{
+				id: 3,
+				homeTeam: 4,
+				homeTeamGoals: 3,
+				awayTeam: 11,
+				awayTeamGoals: 0,
+				inProgress: false
+			},
+			{
+				id: 22,
+				homeTeam: 4,
+				homeTeamGoals: 3,
+				awayTeam: 3,
+				awayTeamGoals: 1,
+				inProgress: false
+			},
+			{
+				id: 46,
+				homeTeam: 4,
+				homeTeamGoals: 1,
+				awayTeam: 12,
+				awayTeamGoals: 1,
+				inProgress: true
+			}
+		]
+	},
+	{
+		id: 9,
+		clubName: 'Internacional',
+		awayTeam: [
+			{
+				id: 10,
+				homeTeam: 2,
+				homeTeamGoals: 0,
+				awayTeam: 9,
+				awayTeamGoals: 2,
+				inProgress: false
+			},
+			{
+				id: 20,
+				homeTeam: 7,
+				homeTeamGoals: 0,
+				awayTeam: 9,
+				awayTeamGoals: 1,
+				inProgress: false
+			},
+			{
+				id: 41,
+				homeTeam: 16,
+				homeTeamGoals: 2,
+				awayTeam: 9,
+				awayTeamGoals: 0,
+				inProgress: true
+			}
+		],
+		homeTeam: [
+			{
+				id: 2,
+				homeTeam: 9,
+				homeTeamGoals: 1,
+				awayTeam: 14,
+				awayTeamGoals: 1,
+				inProgress: false
+			},
+			{
+				id: 29,
+				homeTeam: 9,
+				homeTeamGoals: 0,
+				awayTeam: 4,
+				awayTeamGoals: 4,
+				inProgress: false
+			},
+			{
+				id: 34,
+				homeTeam: 9,
+				homeTeamGoals: 3,
+				awayTeam: 6,
+				awayTeamGoals: 1,
+				inProgress: false
+			}
+		]
+	},
+	{
+		id: 12,
+		clubName: 'Palmeiras',
+		awayTeam: [
+			{
+				id: 9,
+				homeTeam: 1,
+				homeTeamGoals: 0,
+				awayTeam: 12,
+				awayTeamGoals: 3,
+				inProgress: false
+			},
+			{
+				id: 30,
+				homeTeam: 3,
+				homeTeamGoals: 0,
+				awayTeam: 12,
+				awayTeamGoals: 4,
+				inProgress: false
+			},
+			{
+				id: 46,
+				homeTeam: 4,
+				homeTeamGoals: 1,
+				awayTeam: 12,
+				awayTeamGoals: 1,
+				inProgress: true
+			}
+		],
+		homeTeam: [
+			{
+				id: 7,
+				homeTeam: 12,
+				homeTeamGoals: 2,
+				awayTeam: 6,
+				awayTeamGoals: 2,
+				inProgress: false
+			},
+			{
+				id: 18,
+				homeTeam: 12,
+				homeTeamGoals: 4,
+				awayTeam: 5,
+				awayTeamGoals: 2,
+				inProgress: false
+			},
+			{
+				id: 40,
+				homeTeam: 12,
+				homeTeamGoals: 4,
+				awayTeam: 8,
+				awayTeamGoals: 1,
+				inProgress: false
+			}
+		]
+	},
+]
+
+export const FindAllClubsWithMatchesResponse = [
+	{
+		id: 4,
+		clubName: 'Corinthians',
+		awayTeam: [
+			{
+				id: 12,
+				homeTeam: 6,
+				homeTeamGoals: 0,
+				awayTeam: 4,
+				awayTeamGoals: 1,
+				inProgress: false
+			},
+			{
+				id: 29,
+				homeTeam: 9,
+				homeTeamGoals: 0,
+				awayTeam: 4,
+				awayTeamGoals: 4,
+				inProgress: false
+			},
+			{
+				id: 38,
+				homeTeam: 14,
+				homeTeamGoals: 2,
+				awayTeam: 4,
+				awayTeamGoals: 1,
+				inProgress: false
+			}
+		],
+		homeTeam: [
+			{
+				id: 3,
+				homeTeam: 4,
+				homeTeamGoals: 3,
+				awayTeam: 11,
+				awayTeamGoals: 0,
+				inProgress: false
+			},
+			{
+				id: 22,
+				homeTeam: 4,
+				homeTeamGoals: 3,
+				awayTeam: 3,
+				awayTeamGoals: 1,
+				inProgress: false
+			},
+			{
+				id: 46,
+				homeTeam: 4,
+				homeTeamGoals: 1,
+				awayTeam: 12,
+				awayTeamGoals: 1,
+				inProgress: true
+			}
+		]
+	},
+	{
+	id: 12,
+		clubName: 'Palmeiras',
+		awayTeam: [
+			{
+				id: 9,
+				homeTeam: 1,
+				homeTeamGoals: 0,
+				awayTeam: 12,
+				awayTeamGoals: 3,
+				inProgress: false
+			},
+			{
+				id: 30,
+				homeTeam: 3,
+				homeTeamGoals: 0,
+				awayTeam: 12,
+				awayTeamGoals: 4,
+				inProgress: false
+			},
+			{
+				id: 46,
+				homeTeam: 4,
+				homeTeamGoals: 1,
+				awayTeam: 12,
+				awayTeamGoals: 1,
+				inProgress: true
+			}
+		],
+		homeTeam: [
+			{
+				id: 7,
+				homeTeam: 12,
+				homeTeamGoals: 2,
+				awayTeam: 6,
+				awayTeamGoals: 2,
+				inProgress: false
+			},
+			{
+				id: 18,
+				homeTeam: 12,
+				homeTeamGoals: 4,
+				awayTeam: 5,
+				awayTeamGoals: 2,
+				inProgress: false
+			},
+			{
+				id: 40,
+				homeTeam: 12,
+				homeTeamGoals: 4,
+				awayTeam: 8,
+				awayTeamGoals: 1,
+				inProgress: false
+			}
+		]
+	},
+	{
+		id: 14,
+		clubName: 'Santos',
+		awayTeam: [
+			{
+				id: 2,
+				homeTeam: 9,
+				homeTeamGoals: 1,
+				awayTeam: 14,
+				awayTeamGoals: 1,
+				inProgress: false
+			},
+			{
+				id: 24,
+				homeTeam: 10,
+				homeTeamGoals: 2,
+				awayTeam: 14,
+				awayTeamGoals: 2,
+				inProgress: false
+			},
+			{
+				id: 47,
+				homeTeam: 8,
+				homeTeamGoals: 1,
+				awayTeam: 14,
+				awayTeamGoals: 2,
+				inProgress: true
+			}
+		],
+		homeTeam: [
+			{
+				id: 14,
+				homeTeam: 14,
+				homeTeamGoals: 2,
+				awayTeam: 16,
+				awayTeamGoals: 1,
+				inProgress: false
+			},
+			{
+				id: 32,
+				homeTeam: 14,
+				homeTeamGoals: 5,
+				awayTeam: 11,
+				awayTeamGoals: 1,
+				inProgress: false
+			},
+			{
+				id: 38,
+				homeTeam: 14,
+				homeTeamGoals: 2,
+				awayTeam: 4,
+				awayTeamGoals: 1,
+				inProgress: false
+			}
+		]
+	},
+]
 
 export interface IMatchesFindAllResponse {
   id: number,

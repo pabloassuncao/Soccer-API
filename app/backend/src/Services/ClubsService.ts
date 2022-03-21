@@ -6,13 +6,15 @@ export default class ClubsService {
     return ClubRepository.getAll({ raw: true });
   }
 
+  static async getAllClubsWithMatches() {
+    return ClubRepository.getAllClubsWithMatches();
+  }
+
   static async getById(id: number) {
     const res = await ClubRepository.getById(id);
 
-    console.log(res);
-
     if (!res) {
-      throw new Err('UNPROCCESSABLE_ENTITY', 'There is no team with such id!');
+      throw new Err('UNAUTHORIZED', 'There is no team with such id!');
     }
 
     return res;

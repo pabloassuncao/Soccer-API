@@ -241,7 +241,8 @@ describe('Testa os endpoints PATCH do /matchs', () => {
   before(async () => {
     sinon
       .stub(Matches, "findByPk")
-      .resolves(new FinishMatchResponse() as unknown as Matches);
+      .onCall(0).resolves(new FinishMatchResponse() as unknown as Matches)
+      .onCall(1).resolves(null);
   });
 
   after(()=>{
@@ -284,6 +285,26 @@ describe('Testa os endpoints PATCH do /matchs', () => {
         clubName: 'Palmeiras',
       }
     });
+  });
+
+  it('Testa se dar erro no /matchs/:id/finish com um id inexistente', async () => {
+    const login = await chai
+      .request(app)
+      .post('/login')
+      .send({
+        email: 'admin@admin.com',
+        password: 'secret_admin',
+      });
+
+    const chaiHttpResponse = await chai
+      .request(app)
+      .patch('/matchs/564/finish')
+      .set('Authorization', login.body.token);
+
+    expect(chaiHttpResponse.status).to.be.equal(HTTP_UNAUTHORIZED_STATUS);
+    expect(chaiHttpResponse.body).to.be.an('object');
+    expect(chaiHttpResponse.body).to.be.haveOwnProperty('message');
+    expect(chaiHttpResponse.body.message).to.be.equal("Match not found");
   });
 });
 

@@ -61,16 +61,4 @@ export default class MatchRepository {
       },
     });
   }
-
-  // static async findOne(where: object, options?: object): Promise<Matches> {
-  //   const opt = options ? { where, ...options } : { where };
-
-  //   const matches: Matches | null = await Matches.findOne(opt);
-
-  //   if (!matches) {
-  //     throw new Err('UNAUTHORIZED', 'Match not found');
-  //   }
-
-  //   return matches;
-  // }
 }

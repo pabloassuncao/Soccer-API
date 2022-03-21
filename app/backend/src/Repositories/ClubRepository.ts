@@ -20,12 +20,13 @@ export default class ClubRepository {
     return club;
   }
 
-  // static async findOne(where: object, exclude?: string[]): Promise<Clubs | null> {
-  //   const options = exclude ? { where, attributes: { exclude } }
-  //     : { where };
-
-  //   const clubs: Clubs | null = await Clubs.findOne(options);
-
-  //   return clubs;
-  // }
+  static async getAllClubsWithMatches(): Promise<Clubs[]> {
+    const clubs: Clubs[] = await Clubs.findAll({
+      include: [
+        { model: Matches, as: 'awayTeam', attributes: { exclude: ['home_team', 'away_team'] } },
+        { model: Matches, as: 'homeTeam', attributes: { exclude: ['home_team', 'away_team'] } },
+      ],
+    });
+    return clubs;
+  }
 }
