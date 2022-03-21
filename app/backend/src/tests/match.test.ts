@@ -8,6 +8,7 @@ import Clubs from '../database/models/Clubs';
 
 import { ADMIN_USER, ClubsFindAllResponse, FinishMatchResponse,
   HTTP_CREATED_STATUS, HTTP_OK_STATUS, HTTP_UNAUTHORIZED_STATUS,
+  HTTP_UNPROCCESSABLE_ENTITY_STATUS,
   MatchesCreateResponse, MatchesFindAllResponse, MatchesFindAllTrueResponse, NewMatchFindByIdResponse, UpdatedMatchResponse } from './helpers';
 import Users from '../database/models/Users';
 
@@ -228,7 +229,7 @@ describe('Testa os endpoints post do /matchs', () => {
       inProgress: true,
     });
 
-    expect(chaiHttpResponse.status).to.be.equal(HTTP_UNAUTHORIZED_STATUS);
+    expect(chaiHttpResponse.status).to.be.equal(HTTP_UNPROCCESSABLE_ENTITY_STATUS);
     expect(chaiHttpResponse.body).to.be.an('object');
     expect(chaiHttpResponse.body).to.be.haveOwnProperty('message');
     expect(chaiHttpResponse.body.message).to.be.equal("There is no team with such id!");

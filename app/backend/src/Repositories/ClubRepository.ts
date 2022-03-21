@@ -1,3 +1,4 @@
+import Matches from '../database/models/Matches';
 import Clubs from '../database/models/Clubs';
 
 export default class ClubRepository {
@@ -6,7 +7,12 @@ export default class ClubRepository {
     return clubs;
   }
 
-  static async getById(id: number, options: object = {}): Promise<Clubs | null> {
+  static async getById(id: number, options: object = {
+    include: [
+      { model: Matches, as: 'awayTeam', attributes: { exclude: ['home_team', 'away_team'] } },
+      { model: Matches, as: 'homeTeam', attributes: { exclude: ['home_team', 'away_team'] } },
+    ],
+  }): Promise<Clubs | null> {
     const club: Clubs | null = await Clubs.findOne({
       where: { id },
       ...options,

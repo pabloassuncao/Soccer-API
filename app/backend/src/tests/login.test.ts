@@ -48,8 +48,6 @@ describe('Testa o login', () => {
       const chaiHttpResponse = await chai
         .request(app)
         .post('/login')
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
         .send({
           email: 'admin@admin.com',
         });
@@ -64,8 +62,6 @@ describe('Testa o login', () => {
       const chaiHttpResponse = await chai
         .request(app)
         .post('/login')
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
         .send({
           password: 'secret_admin',
         });
@@ -79,12 +75,21 @@ describe('Testa o login', () => {
   });
 
   describe('Testa o login com dados inválidos', async () => {
+    before(async () => {
+      sinon
+        .stub(Users, "findOne")
+        .onCall(0).resolves(ADMIN_USER as Users)
+        .onCall(1).resolves(null);
+    });
+
+    after(()=>{
+      (Users.findOne as sinon.SinonStub).restore();
+    })
+
     it('Testa dar erro ao tentar logar com senha inválida', async () => {
       const chaiHttpResponse = await chai
         .request(app)
         .post('/login')
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
         .send({
           email: 'admin@admin.com',
           password: 'invalid_password',
@@ -101,8 +106,6 @@ describe('Testa o login', () => {
       const chaiHttpResponse = await chai
         .request(app)
         .post('/login')
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
         .send({
           email: 'test@test.com',
           password: 'secret_admin',

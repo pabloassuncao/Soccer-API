@@ -1,4 +1,47 @@
 import { readFileSync } from 'fs';
+import Clubs from './database/models/Clubs';
+import Matches from './database/models/Matches';
+
+export interface Leaderboard {
+  name: string,
+  totalPoints: number,
+  totalGames: number,
+  totalVictories: number,
+  totalDraws: number,
+  totalLosses: number,
+  goalsFavor: number,
+  goalsOwn: number,
+  goalsBalance: number,
+  efficiency: number,
+}
+
+export interface IMatches extends Matches{
+  homeTeam: number,
+  awayTeam: number,
+  homeTeamGoals: number,
+  awayTeamGoals: number,
+  inProgress: boolean,
+}
+
+export interface IClub extends Clubs {
+  id: number,
+  clubName: string,
+  awayTeam?: IMatches[],
+  homeTeam?: IMatches[],
+}
+
+export const newClubInfo = {
+  name: '',
+  totalPoints: 0,
+  totalGames: 0,
+  totalVictories: 0,
+  totalDraws: 0,
+  totalLosses: 0,
+  goalsFavor: 0,
+  goalsOwn: 0,
+  goalsBalance: 0,
+  efficiency: 0,
+};
 
 export enum MESSAGES {
   EMAIL_PASSWORD_EMPTY = 'All fields must be filled',
