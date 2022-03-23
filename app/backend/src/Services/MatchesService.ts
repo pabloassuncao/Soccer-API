@@ -36,7 +36,7 @@ export default class MatchesService {
   }
 
   static async getById(id: number) {
-    const res = MatchRepository
+    const res = await MatchRepository
       .getById(id);
 
     return res;

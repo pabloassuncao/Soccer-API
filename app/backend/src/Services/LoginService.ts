@@ -5,7 +5,7 @@ import { Err, JWT_SECRET, MESSAGES } from '../utils';
 import Users from '../database/models/Users';
 
 export default class LoginService {
-  private static async Checker(user: Users | null, password: string) {
+  private static Checker(user: Users | null, password: string) {
     if (!user) {
       throw new Err('BAD_REQUEST', MESSAGES.EMAIL_PASSWORD_INVALID);
     }
@@ -18,7 +18,7 @@ export default class LoginService {
   static async Login(data: { email: string, password: string }) {
     const user = await UserRepository.findByEmail(data.email);
 
-    await this.Checker(user, data.password);
+    this.Checker(user, data.password);
 
     const result = await UserRepository.findByEmail(data.email, ['password']);
 
@@ -34,7 +34,7 @@ export default class LoginService {
     };
   }
 
-  static async Validate(user: Users) {
+  static Validate(user: Users) {
     return user.role;
   }
 }

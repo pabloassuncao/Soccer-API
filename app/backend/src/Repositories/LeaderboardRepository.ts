@@ -21,7 +21,7 @@ export default class LeaderboardRepository {
       acc.totalGames += 1;
       if (match.homeTeamGoals === match.awayTeamGoals) {
         acc.totalDraws += 1;
-      } else if (match.homeTeamGoals > match.awayTeamGoals === (match.homeTeam === club.id)) {
+      } else if ((match.homeTeamGoals > match.awayTeamGoals) === (match.homeTeam === club.id)) {
         acc.totalVictories += 1;
       } else {
         acc.totalLosses += 1;

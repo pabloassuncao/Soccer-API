@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { Leaderboard } from '../utils';
 import LeaderboardRepository from '../Repositories/LeaderboardRepository';
 import ClubsService from './ClubsService';

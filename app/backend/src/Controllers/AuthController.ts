@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { MESSAGES, JWT_SECRET } from '../utils';
 
 export default class AuthController {
-  static async authenticator(req: Request, res: Response, next: NextFunction) {
+  static authenticator(req: Request, res: Response, next: NextFunction) {
     const token = req.headers.authorization;
 
     if (!token) {

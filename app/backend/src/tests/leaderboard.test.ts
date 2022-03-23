@@ -3,9 +3,8 @@ import chai from 'chai';
 import chaiHttp = require('chai-http');
 
 import { app } from '../app';
-import Users from '../database/models/Users';
 
-import { ADMIN_USER, FindAllClubsWithMatchesAwayResponse, FindAllClubsWithMatchesHomeResponse, FindAllClubsWithMatchesResponse, HTTP_BAD_REQUEST_STATUS, HTTP_OK_STATUS, HTTP_UNAUTHORIZED_STATUS, HTTP_UNPROCCESSABLE_ENTITY_STATUS, LOGIN_ROUTE, LOGIN_VALIDATE_ROUTE } from './helpers';
+import { FindAllClubsWithMatchesAwayResponse, FindAllClubsWithMatchesHomeResponse, FindAllClubsWithMatchesResponse, HTTP_BAD_REQUEST_STATUS, HTTP_OK_STATUS } from './helpers';
 import Clubs from '../database/models/Clubs';
 
 chai.use(chaiHttp);
